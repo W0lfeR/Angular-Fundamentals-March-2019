@@ -1,19 +1,23 @@
-const mongoose = require('mongoose')
-const User = require('../models/User')
-const Computer = require('../models/Computer')
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-mongoose.Promise = global.Promise
+const User = require('../models/User');
 
-module.exports = (settings) => {
-  mongoose.connect(settings.db)
-  let db = mongoose.connection
-
+module.exports = config => {
+  mongoose.connect(config.dbPath,{
+      useNewUrlParser: true
+    });
+  const db = mongoose.connection;
   db.once('open', err => {
-    if (err) {
-      throw err
-    }
-    console.log('MongoDB ready!')
-    User.seedAdminUser()
-  })
-  db.on('error', err => console.log(`Database error: ${err}`))
-}
+    if (err) throw err;
+    User.seedAdminUser().then(() => {
+      console.log('Database ready');
+    }).catch((reason) => {
+      console.log('Something went wrong');
+      console.log(reason);
+    });
+  });
+  db.on('error', reason => {
+    console.log(reason);
+  });
+};
