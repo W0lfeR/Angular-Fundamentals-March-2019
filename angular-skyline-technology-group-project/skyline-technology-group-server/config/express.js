@@ -14,7 +14,7 @@ module.exports = app => {
   app.use(bodyParser.json())
   app.use(passport.initialize())
   app.use(cors({
-    origin: 'http://localhost:4200'
+    //origin: 'http://localhost:4200'
   }))
 
   passport.use('local-signup', localSignupStrategy)
