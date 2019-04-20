@@ -13,6 +13,7 @@ import { CreateComponent } from './components/article/create/create.component';
 import { DetailsComponent } from './components/article/details/details.component';
 import { AllComponent } from './components/article/all/all.component';
 import { DeleteComponent } from './components/article/delete/delete.component';
+import { SinglePostResolver } from './components/article/article.resolver';
 
 
 const routes: Routes = [
@@ -22,8 +23,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'components/article/create', component: CreateComponent, canActivate: [AdminGuard] },
   { path: 'components/article/all', component: AllComponent },
-  { path: 'details/:id', component: DetailsComponent},
-  { path: 'components/article/edit/:id', component: EditComponent, canActivate: [AdminGuard] },
+  { path: 'details/:id', component: DetailsComponent, resolve: { post: SinglePostResolver } },
+  { path: 'edit/:id', component: EditComponent, canActivate: [AdminGuard] },
    { path: 'delete/:id', component: DeleteComponent, canActivate: [AdminGuard] },
 
 ];
