@@ -10,7 +10,7 @@ function validatePostForm(payload) {
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.title !== 'string' || payload.title.length <= 10) {
+  if (!payload || typeof payload.title !== 'string' || payload.title.length <= 3) {
     isFormValid = false
     errors.title = 'title must be more than 10 symbols.'
   }
