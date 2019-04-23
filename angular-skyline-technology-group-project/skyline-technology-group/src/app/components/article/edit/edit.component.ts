@@ -16,7 +16,7 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.form  = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
+      title: ['', [Validators.required, Validators.minLength(3)]],
       image:['', Validators.required],
       content:['', Validators.required],
     })
